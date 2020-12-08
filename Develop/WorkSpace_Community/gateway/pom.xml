@@ -11,6 +11,7 @@
     <modules>
         <module>AMoudule</module>
         <module>gatewayModule</module>
+        <module>index</module>
     </modules>
 
     <dependencies>

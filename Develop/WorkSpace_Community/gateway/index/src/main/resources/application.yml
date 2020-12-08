@@ -1,0 +1,23 @@
+server:
+  port: 16000
+#服务名
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes: #路由配置:参数为一个List
+
+        - id: consumer-9090 #唯一标识
+          uri: lb://RIBBON-CONSUMER #转发的地址,写服务名称
+          predicates:
+            - Path=/ribbon/** #判断匹配条件,即地址带有/ribbon/**的请求,会转发至lb:RIBBON-CONSUMER
+          filters:
+            - StripPrefix=1 #去掉Path前缀,参数为1代表去掉/ribbon
+
+        - id: consumer-9091
+          uri: lb://FEIGN-CONSUMER
+          predicates:
+            - Path=/feign/**
+          filters:
+            - StripPrefix=1
